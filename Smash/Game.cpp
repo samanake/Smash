@@ -43,11 +43,10 @@ void Game::checkCollision(Player* player, vector<Floor*>* floors) {
 
 		text3.setString("Player: " + to_string(player->get_left_x()) + "," + to_string(player->get_right_x()) +
 			" by " + to_string(player->get_top_y()) + "," + to_string(player->get_bottom_y()));
-
 		text4.setString("Can Jump: " + to_string(player1->canJump()));
 		text5.setString("Jumped1: " + to_string(player->getJumped1()));
 		text6.setString("Jumped2: " + to_string(player->getJumped2()));
-		text7.setString("IsJumping: " + to_string(player->getIsJumping()));
+		text7.setString("Player XVel: " + to_string(player1->getXVelocity()));
 
 		player->checkFloorCollision(i);
 
@@ -120,8 +119,8 @@ void Game::render() { //only draws and stuff
 	window->draw(text3);
 	window->draw(text4);
 	window->draw(text5);
-	window->draw(text6);
-	window->draw(text7);*/
+	window->draw(text6);*/
+	window->draw(text7);
 	player1->draw(window);
 	player2->draw(window);
 	stage->draw(window);

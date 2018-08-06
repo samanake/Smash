@@ -14,7 +14,7 @@ Player::Player(sf::Keyboard::Key* keys, const char* textures, sf::RenderWindow *
 	setSprite(); //initializes sprite to 0th texture
 
 	projectiles = new vector<Projectile*>();
-	cooldown = 0;
+	
 }
 
 void Player::setTextures(const char* textures) {
@@ -50,7 +50,14 @@ void Player::checkPlayerButtons(sf::Event& event, bool cond) {
 		right = cond;
 	}
 	if (event.key.code == keys[4]) {
-		projectileFired = cond;
+		if (cooldown == NULL && cond) {
+			cooldown = new LifeSpan(200);
+			projectileFired = cond;
+		}
+		else if (cooldown == NULL && !cond) {
+			projectileFired = cond;
+		}
+		
 	}
 }
 
@@ -61,14 +68,20 @@ void Player::update() {
 
 	if (left && xvelocity >= -xspeed) xvelocity -= xspeed;
 	else if (right && xvelocity <= xspeed) xvelocity += xspeed;
-	else if (xvelocity >= 0) xvelocity -= .2f;
-	else if (xvelocity <= 0) xvelocity += .2f;
+	else if (xvelocity > 0.008) xvelocity -= dragFactor;
+	else if (xvelocity < -0.008) xvelocity += dragFactor;
+	else xvelocity = 0.00000000000;
 	movement.x = xvelocity;
 	movement.y = yvelocity;
 	sprite->move(movement);
 
 	yvelocity += gravity;
-
+	if (cooldown != NULL) {
+		if (cooldown->hasEnded()) {
+			delete cooldown;
+			cooldown = NULL;
+		}
+	}
 	updateProjectiles();
 }
 

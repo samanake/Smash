@@ -14,12 +14,12 @@ private:
 	sf::Keyboard::Key* keys;
 
 	float xspeed; //speed in the x direction
-	float xvelocity,yvelocity; //velocity in the x and y direction
+	double xvelocity,yvelocity; //velocity in the x and y direction
 	float jumpStr; //strength of jump
 
 	vector<Projectile*>* projectiles;
 
-	int cooldown;
+	LifeSpan * cooldown;
 	sf::RenderWindow * ref_window;
 public:
 	Player(sf::Keyboard::Key* keys, const char* textures, sf::RenderWindow * window);

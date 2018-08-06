@@ -8,12 +8,12 @@ class Projectile : public Object
 private:
 	Object * owner;
 	sf::Vector2f* direction;
-	float velocity, drag;
+	double velocity, drag;
 	LifeSpan* lifespan; //lifespan left
 	int damage;
 public:
 	Projectile(const char* textures, Object* object,
-		float velocity, int lifespan, int damage, sf::RenderWindow * window);
+		double velocity, int lifespan, int damage, sf::RenderWindow * window);
 	void checkFloorCollision(Object* floor);
 	void update();
 	bool checkOutOfBounds();

@@ -1,6 +1,6 @@
 #include "Projectile.h"
 
-Projectile::Projectile(const char* textures, Object* object, float velocity, int lifespan, 
+Projectile::Projectile(const char* textures, Object* object, double velocity, int lifespan, 
 						int damage, sf::RenderWindow * window) :Object(textures)
 {
 	owner = object;
@@ -16,7 +16,7 @@ Projectile::Projectile(const char* textures, Object* object, float velocity, int
 	direction->y = sin(angle);
 
 	this->velocity = velocity;
-	drag = .02f;
+	drag = .02;
 
 	this->lifespan = new LifeSpan(lifespan);
 
