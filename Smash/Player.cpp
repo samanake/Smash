@@ -13,6 +13,7 @@ Player::Player(sf::Keyboard::Key* keys, const char* textures, sf::RenderWindow *
 	setTextures(textures);
 	setSprite(); //initializes sprite to 0th texture
 
+	cooldown = NULL;
 	projectiles = new vector<Projectile*>();
 	
 }
@@ -50,14 +51,7 @@ void Player::checkPlayerButtons(sf::Event& event, bool cond) {
 		right = cond;
 	}
 	if (event.key.code == keys[4]) {
-		if (cooldown == NULL && cond) {
-			cooldown = new LifeSpan(200);
-			projectileFired = cond;
-		}
-		else if (cooldown == NULL && !cond) {
-			projectileFired = cond;
-		}
-		
+		projectileFired = cond;
 	}
 }
 
@@ -70,18 +64,14 @@ void Player::update() {
 	else if (right && xvelocity <= xspeed) xvelocity += xspeed;
 	else if (xvelocity > 0.008) xvelocity -= dragFactor;
 	else if (xvelocity < -0.008) xvelocity += dragFactor;
-	else xvelocity = 0.00000000000;
+	else xvelocity = 0.000;
 	movement.x = xvelocity;
 	movement.y = yvelocity;
 	sprite->move(movement);
 
 	yvelocity += gravity;
-	if (cooldown != NULL) {
-		if (cooldown->hasEnded()) {
-			delete cooldown;
-			cooldown = NULL;
-		}
-	}
+
+	checkCooldown();
 	updateProjectiles();
 }
 
@@ -124,17 +114,30 @@ void Player::push_back(sf::Vector2f* direction) { //like smash, hits or projecti
 		yvelocity = -yvelocity;
 	}*/
 	xvelocity += direction->x*health*damageFactor;
-	yvelocity += direction->y*health*damageFactor;
+	yvelocity += direction->y*health*damageFactor*damageFactor;
 }
 
 void Player::addProjectile(Projectile* projectile) { //whenever a key is pressed projectile is added and launched
 	projectiles->push_back(projectile);
 }
 
+void Player::checkCooldown() {
+	if (cooldown != NULL) {
+		if (cooldown->hasEnded()) {
+			delete cooldown;
+			cooldown = NULL;
+		}
+	}
+}
+
 void Player::updateProjectiles() { //moves their respective sprites
 	//adding projectile
-	if (projectileFired)
-		addProjectile(new Projectile(projectile1, this, 5.0f, 2000, 10, ref_window));
+	if (projectileFired) {
+		if (cooldown == NULL) {
+			addProjectile(new Projectile(projectile1, this, 5.0f, 2000, 10, ref_window));
+			cooldown = new LifeSpan(300);	
+		}
+	}
 
 	//updating projectiles
 	for (int i = 0; i < projectiles->size(); i++) {

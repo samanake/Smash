@@ -46,6 +46,7 @@ public:
 	void updateProjectiles();
 	void drawProjectiles(sf::RenderWindow* window);
 
+	void checkCooldown();
 	void checkFloorCollision(Object* floor);
 
 	int getNumberOfProjectiles();
