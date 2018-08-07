@@ -1,19 +1,14 @@
 #include "Object.h"
 
 
-Object::Object(const char* textures)
+Object::Object(const char** textures, int* text_size)
 {
-	texture = new sf::Texture;
-	texture->loadFromFile(textures);
+	initializeSpriteSheets(textures, text_size);
+
 	sprite = new sf::Sprite;
-	sprite->setTexture(*this->texture);
-	spritesheet = new sf::IntRect;
+	sprite->setTexture(*(spritesheets->at(0)->getTexture()));
 	sprite_height = sprite->getGlobalBounds().height;
 	sprite_width = sprite->getGlobalBounds().width;
-
-}
-Object::Object() {
-
 }
 
 void Object::draw(sf::RenderWindow* window) {
@@ -52,8 +47,13 @@ int Object::checkCollisionDirectionY(Object* object) {
 sf::Sprite* Object::getSprite() {
 	return sprite;
 }
-void Object::setUpSpriteSheet() {
+void Object::initializeSpriteSheets(const char** textures, int* text_size) {
+	size = sizeof(text_size) / sizeof(text_size[0]);
 
+	spritesheets = new vector<SpriteSheet*>(size);
+	for (int i = 0; i < spritesheets->size(); i++) {
+		spritesheets->at(i) = new SpriteSheet(textures[i], text_size[i]);
+	}
 }
 
 bool Object::isAbove(Object* object) { return get_bottom_y() - 6 <= object->get_top_y(); }
@@ -103,6 +103,9 @@ void Object::place_left_of(Object* object) {
 Object::~Object()
 {
 	delete sprite;
-	delete texture;
-	delete spritesheet;
+
+	for (int i = 0; i < spritesheets->size(); i++) {
+		delete spritesheets->at(i);
+	}
+	delete spritesheets;
 }

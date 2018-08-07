@@ -11,9 +11,10 @@ Stage::Stage()
 }
 
 void Stage::addFloor(float width, float height, float xpos, float ypos) {
-	Floor* floor = new Floor(width, height, xpos, ypos);
+	Floor* floor = new Floor(ground, groundsize, width, height, xpos, ypos);
 	floors.push_back(floor);
 }
+
 void Stage::draw(sf::RenderWindow* window) {
 	window->draw(*backgroundSprite);
 	for (auto i : floors) {
@@ -21,10 +22,11 @@ void Stage::draw(sf::RenderWindow* window) {
 	}
 }
 
-Stage::~Stage()
-{
-}
 
 vector<Floor*>* Stage::getFloors() {
 	return &floors;
+}
+
+Stage::~Stage()
+{
 }

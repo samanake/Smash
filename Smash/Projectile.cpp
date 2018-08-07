@@ -1,11 +1,11 @@
 #include "Projectile.h"
 
-Projectile::Projectile(const char* textures, Object* object, double velocity, int lifespan, 
-						int damage, sf::RenderWindow * window) :Object(textures)
+Projectile::Projectile(const char** textures, int* text_size, Object* owner, double velocity, int lifespan, 
+						int damage, sf::RenderWindow * window) :Object(textures, text_size)
 {
-	owner = object;
+	owner = owner;
 	sf::Vector2i mouse = sf::Mouse::getPosition(*window);
-	sf::Vector2f object_pos = object->getSprite()->getPosition();
+	sf::Vector2f object_pos = owner->getSprite()->getPosition();
 	sprite->setPosition(object_pos);
 
 	direction = new sf::Vector2f();

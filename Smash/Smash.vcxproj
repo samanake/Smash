@@ -27,6 +27,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerBools.cpp" />
     <ClCompile Include="Projectile.cpp" />
+    <ClCompile Include="SpriteSheet.cpp" />
     <ClCompile Include="Stage.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -40,6 +41,7 @@
     <ClInclude Include="PlayerBools.h" />
     <ClInclude Include="PlayerControls.h" />
     <ClInclude Include="Projectile.h" />
+    <ClInclude Include="SpriteSheet.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="Textures.h" />
     <ClInclude Include="Window.h" />

@@ -1,7 +1,7 @@
 #include "Player.h"
 using namespace std;
 //the player is given its own vector of projectiles. When a player is killed, its projectiles slowly fade/are deleted along with the players.
-Player::Player(sf::Keyboard::Key* keys, const char* textures, sf::RenderWindow * window) :Object(textures)
+Player::Player(sf::Keyboard::Key* keys, const char** textures, int* size, sf::RenderWindow * window) :Object(textures, size)
 {
 	this->keys = keys;
 	this->ref_window = window;
@@ -10,21 +10,10 @@ Player::Player(sf::Keyboard::Key* keys, const char* textures, sf::RenderWindow *
 	xvelocity = 0;
 	yvelocity = 0;
 	jumpStr = -2.f;
-	setTextures(textures);
-	setSprite(); //initializes sprite to 0th texture
 
 	cooldown = NULL;
 	projectiles = new vector<Projectile*>();
 	
-}
-
-void Player::setTextures(const char* textures) {
-	if (texture->loadFromFile(textures)) {
-	}
-}
-
-void Player::setSprite() {
-	sprite->setTexture(*texture);
 }
 
 void Player::attack() {
@@ -134,7 +123,7 @@ void Player::updateProjectiles() { //moves their respective sprites
 	//adding projectile
 	if (projectileFired) {
 		if (cooldown == NULL) {
-			addProjectile(new Projectile(projectile1, this, 5.0f, 2000, 10, ref_window));
+			addProjectile(new Projectile(fireball, fireballsize, this, 5.0f, 2000, 10, ref_window));
 			cooldown = new LifeSpan(300);	
 		}
 	}
@@ -173,7 +162,7 @@ float Player::getXVelocity() { return xvelocity; }
 float Player::getYVelocity() { return yvelocity; }
 
 
-int Player::getNumberOfProjectiles() { return projectiles->size(); }
+size_t Player::getNumberOfProjectiles() { return projectiles->size(); }
 
 vector<Projectile*>* Player::getProjectiles() { return projectiles; }
 

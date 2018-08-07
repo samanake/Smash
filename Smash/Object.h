@@ -1,26 +1,25 @@
 #pragma once
 #include "Textures.h"
+#include "SpriteSheet.h"
 #include <SFML\Graphics.hpp>
 using namespace std;
 class Object
 {
 protected:
-	sf::Texture* texture;
-	sf::IntRect* spritesheet;
+	vector<SpriteSheet*>* spritesheets;
 	sf::Sprite* sprite;
 	float sprite_height;
 	float sprite_width;
-
+	size_t size; //number of spritesheets
 public:
-	Object(const char* textures);
-	Object();
+	Object(const char** textures, int* text_size);
+
+	void initializeSpriteSheets(const char** textures, int* text_size);
 
 	virtual bool isColliding(Object* object);
 	int checkCollisionDirection(Object* object);
 	int checkCollisionDirectionX(Object* object);
 	int checkCollisionDirectionY(Object* object);
-
-	void setUpSpriteSheet();
 
 	float get_left_x();
 	float get_right_x();

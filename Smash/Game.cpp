@@ -5,9 +5,9 @@ Game::Game(sf::RenderWindow& window)
 	//initialize players
 	players = new vector<Player*>();
 
-	player1 = new Player(key1, p1idle, &window);
+	player1 = new Player(key1, p1, p1size, &window);
 	players->push_back(player1);
-	player2 = new Player(key2, p2idle, &window);
+	player2 = new Player(key2, p2, p2size, &window);
 	players->push_back(player2);
 
 	font.loadFromFile("opensans.ttf");

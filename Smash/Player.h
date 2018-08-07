@@ -22,12 +22,10 @@ private:
 	LifeSpan * cooldown;
 	sf::RenderWindow * ref_window;
 public:
-	Player(sf::Keyboard::Key* keys, const char* textures, sf::RenderWindow * window);
+	Player(sf::Keyboard::Key* keys, const char** textures, int* size, sf::RenderWindow * window);
 
 	void attack();
 	void checkPlayerButtons(sf::Event& event, bool cond);
-	void setTextures(const char*textures);
-	void setSprite();
 	void update();
 	void draw(sf::RenderWindow* window);
 	void setXVelocity(float xVelocity);
@@ -49,7 +47,7 @@ public:
 	void checkCooldown();
 	void checkFloorCollision(Object* floor);
 
-	int getNumberOfProjectiles();
+	size_t getNumberOfProjectiles();
 	vector<Projectile*>* getProjectiles();
 
 	void addHealth(int health);
