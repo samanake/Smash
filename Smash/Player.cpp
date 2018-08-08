@@ -51,8 +51,8 @@ void Player::update() {
 
 	if (left && xvelocity >= -xspeed) xvelocity -= xspeed;
 	else if (right && xvelocity <= xspeed) xvelocity += xspeed;
-	else if (xvelocity > 0.008) xvelocity -= dragFactor;
-	else if (xvelocity < -0.008) xvelocity += dragFactor;
+	else if (xvelocity > 0.031) xvelocity -= dragFactor;
+	else if (xvelocity < -0.031) xvelocity += dragFactor;
 	else xvelocity = 0.000;
 	movement.x = xvelocity;
 	movement.y = yvelocity;
@@ -73,9 +73,6 @@ void Player::checkFloorCollision(Object* floor) { //interacts with collision bet
 	int check = checkCollisionDirection(floor);
 	if ((check & 0x1)) { //"player on top"
 		setYVelocity(0);
-
-		//first checking if any collision between projectile and floors
-
 		this->place_on(floor);
 		this->resetJumpBools();
 	}
@@ -96,18 +93,9 @@ void Player::pause() { //this would be called if player was stunned or something
 
 }
 void Player::push_back(sf::Vector2f* direction) { //like smash, hits or projectiles send players backwards
-	/*if ((direction->x > 0 && xvelocity < 0) || (direction->x < 0 && xvelocity > 0)) {
-		xvelocity = -xvelocity;
-	}
-	if ((direction->y > 0 && yvelocity < 0) || (direction->y < 0 && yvelocity > 0)) {
-		yvelocity = -yvelocity;
-	}*/
+
 	xvelocity += direction->x*health*damageFactor;
 	yvelocity += direction->y*health*damageFactor*damageFactor;
-}
-
-void Player::addProjectile(Projectile* projectile) { //whenever a key is pressed projectile is added and launched
-	projectiles->push_back(projectile);
 }
 
 void Player::checkCooldown() {
@@ -141,6 +129,10 @@ void Player::updateProjectiles() { //moves their respective sprites
 	}
 }
 
+void Player::addProjectile(Projectile* projectile) { //whenever a key is pressed projectile is added and launched
+	projectiles->push_back(projectile);
+}
+
 void Player::drawProjectiles(sf::RenderWindow* window) { //draws all projectiles' sprites
 	for (auto i : *projectiles) {
 		i->draw(window);
@@ -163,7 +155,6 @@ float Player::getYVelocity() { return yvelocity; }
 
 
 size_t Player::getNumberOfProjectiles() { return projectiles->size(); }
-
 vector<Projectile*>* Player::getProjectiles() { return projectiles; }
 
 void Player::addHealth(int health) { this->health += health; }

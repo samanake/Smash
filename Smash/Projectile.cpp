@@ -3,7 +3,7 @@
 Projectile::Projectile(const char** textures, int* text_size, Object* owner, double velocity, int lifespan, 
 						int damage, sf::RenderWindow * window) :Object(textures, text_size)
 {
-	owner = owner;
+	this->owner = owner;
 	sf::Vector2i mouse = sf::Mouse::getPosition(*window);
 	sf::Vector2f object_pos = owner->getSprite()->getPosition();
 	sprite->setPosition(object_pos);

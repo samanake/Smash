@@ -48,11 +48,10 @@ sf::Sprite* Object::getSprite() {
 	return sprite;
 }
 void Object::initializeSpriteSheets(const char** textures, int* text_size) {
-	size = sizeof(text_size) / sizeof(text_size[0]);
-
-	spritesheets = new vector<SpriteSheet*>(size);
-	for (int i = 0; i < spritesheets->size(); i++) {
-		spritesheets->at(i) = new SpriteSheet(textures[i], text_size[i]);
+	size = sizeof(text_size) / sizeof(text_size[0]) - 1;
+	spritesheets = new vector<SpriteSheet*>;
+	for (int i = 0; i < size; i++) {
+		spritesheets->push_back(new SpriteSheet(textures[i], text_size[i]));
 	}
 }
 
