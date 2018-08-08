@@ -3,14 +3,14 @@
 
 Object::Object(const char** textures, int* text_size)
 {
-	initializeSpriteSheets(textures, text_size);
 
 	sprite = new sf::Sprite;
-	spritesheet = spritesheets->at(0);
-	sprite->setTexture(*spritesheet->getTexture());
-	sprite->setTextureRect(*spritesheet->getRect(0));
+	sprite->setScale(3.f, 3.f);
 	sprite_height = sprite->getGlobalBounds().height;
 	sprite_width = sprite->getGlobalBounds().width;
+
+	initializeSpriteSheets(textures, text_size); //initializes current one as well
+
 }
 
 void Object::draw(sf::RenderWindow* window) {
@@ -18,7 +18,25 @@ void Object::draw(sf::RenderWindow* window) {
 }
 
 void Object::update() {
-	return;
+	current_spritesheet->update();
+	sprite->setTextureRect(*current_spritesheet->getRect());
+}
+
+void Object::switchSpriteSheets(int index) {
+	current_spritesheet = spritesheets->at(index);
+	sprite->setTexture(*current_spritesheet->getTexture());
+	sprite->setTextureRect(*current_spritesheet->getRect());
+	current_spritesheet->play();
+}
+
+void Object::initializeSpriteSheets(const char** textures, int* text_size) {
+	size = sizeof(text_size) / sizeof(text_size[0]) - 1;
+	spritesheets = new vector<SpriteSheet*>;
+	for (int i = 0; i < size; i++) {
+		spritesheets->push_back(new SpriteSheet(textures[i], text_size[i]));
+	}
+
+	switchSpriteSheets(0);
 }
 
 bool Object::isColliding(Object* object) {
@@ -49,13 +67,7 @@ int Object::checkCollisionDirectionY(Object* object) {
 sf::Sprite* Object::getSprite() {
 	return sprite;
 }
-void Object::initializeSpriteSheets(const char** textures, int* text_size) {
-	size = sizeof(text_size) / sizeof(text_size[0]) - 1;
-	spritesheets = new vector<SpriteSheet*>;
-	for (int i = 0; i < size; i++) {
-		spritesheets->push_back(new SpriteSheet(textures[i], text_size[i]));
-	}
-}
+
 
 bool Object::isAbove(Object* object) { return get_bottom_y() - 6 <= object->get_top_y(); }
 

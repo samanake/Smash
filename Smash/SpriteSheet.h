@@ -9,14 +9,15 @@ private:
 	int width, height;
 	int num; //number of sprites in the spritesheet
 	int index;
+	bool isPlaying;
 	LifeSpan* rotation;
 public:
 	SpriteSheet(const char* filename, int num);
-	sf::IntRect* getRect(int index);
+	sf::IntRect* getRect();
 	sf::Texture* getTexture();
 	int getNum();
 	int getIndex();
 	void play();
-	void stop();
+	void update();
 	~SpriteSheet();
 };

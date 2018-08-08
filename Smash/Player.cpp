@@ -13,7 +13,7 @@ Player::Player(sf::Keyboard::Key* keys, const char** textures, int* size, sf::Re
 
 	cooldown = NULL;
 	projectiles = new vector<Projectile*>();
-	
+	idle();
 }
 
 void Player::attack() {
@@ -48,6 +48,7 @@ void Player::update() {
 	sf::Vector2f movement(0.f, 0.f);
 	//if (left) movement.x -= xspeed;
 	//if (right) movement.x += xspeed;
+	Object::update();
 
 	if (left && xvelocity >= -xspeed) xvelocity -= xspeed;
 	else if (right && xvelocity <= xspeed) xvelocity += xspeed;
@@ -90,9 +91,7 @@ void Player::checkFloorCollision(Object* floor) { //interacts with collision bet
 }
 
 void Player::idle() {
-	SpriteSheet* idleSprite = spritesheets->at(0);
-	sprite->setTextureRect(*spritesheets->at(0)->getRect(0));
-
+	switchSpriteSheets(0);
 }
 void Player::pause() { //this would be called if player was stunned or something
 
@@ -117,7 +116,8 @@ void Player::updateProjectiles() { //moves their respective sprites
 	if (projectileFired) {
 		if (cooldown == NULL) {
 			addProjectile(new Projectile(fireball, fireballsize, this, 5.0f, 2000, 10, ref_window));
-			cooldown = new LifeSpan(300);	
+			cooldown = new LifeSpan(300);
+			//switchSpriteSheets(1);
 		}
 	}
 

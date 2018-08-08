@@ -8,8 +8,7 @@ class Object
 protected:
 	vector<SpriteSheet*>* spritesheets;
 	sf::Sprite* sprite;
-	sf::IntRect* currentRect;
-	SpriteSheet* spritesheet;
+	SpriteSheet* current_spritesheet;
 	float sprite_height;
 	float sprite_width;
 	size_t size; //number of spritesheets
@@ -17,6 +16,7 @@ public:
 	Object(const char** textures, int* text_size);
 
 	void initializeSpriteSheets(const char** textures, int* text_size);
+	void switchSpriteSheets(int index);
 
 	virtual bool isColliding(Object* object);
 	int checkCollisionDirection(Object* object);
@@ -32,6 +32,7 @@ public:
 	bool isBelow(Object* object);
 	bool isLeftOf(Object* object);
 	bool isRightOf(Object* object);
+
 	sf::Sprite* getSprite();
 
 	float getWidth();

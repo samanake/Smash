@@ -10,7 +10,7 @@ SpriteSheet::SpriteSheet(const char* filename, int num) {
 	for (int i = 0; i < num; i++) {
 		rect[i] = sf::IntRect(i*width, 0, width, height);
 	}
-	
+	this->num = num;
 	index = 0;
 }
 
@@ -18,16 +18,26 @@ int SpriteSheet::getNum() { return num; }
 
 int SpriteSheet::getIndex() { return index; }
 
-sf::IntRect* SpriteSheet::getRect(int index) { return &rect[index]; }
+sf::IntRect* SpriteSheet::getRect() { return &rect[index]; }
 
 void SpriteSheet::play() {
-	if (rotation == NULL) {
-		rotation = new LifeSpan(rotationSpeed*num);
-	}
+	index = 0;
+	if (rotation == NULL) 
+		rotation = new LifeSpan(rotationSpeed);
+	else rotation->reset(rotationSpeed);
+	isPlaying = true;
 }
 
-void SpriteSheet::stop() {
-	if (rotation != NULL) delete rotation;
+void SpriteSheet::update() {
+	if (rotation != NULL) {
+		if (rotation->hasEnded()) {
+			if (index + 1 == num) {
+				index = 0;
+			}
+			else index++;
+			rotation->reset(rotationSpeed);
+		}
+	}
 }
 
 sf::Texture* SpriteSheet::getTexture() {
