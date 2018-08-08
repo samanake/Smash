@@ -32,6 +32,8 @@ public:
 	void setYVelocity(float yVelocity);
 	float getXVelocity();
 	float getYVelocity();
+
+	void idle();
 	void pause();
 	void push_back(sf::Vector2f* direction); 
 

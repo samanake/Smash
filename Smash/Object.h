@@ -8,6 +8,8 @@ class Object
 protected:
 	vector<SpriteSheet*>* spritesheets;
 	sf::Sprite* sprite;
+	sf::IntRect* currentRect;
+	SpriteSheet* spritesheet;
 	float sprite_height;
 	float sprite_width;
 	size_t size; //number of spritesheets

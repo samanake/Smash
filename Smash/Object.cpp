@@ -6,7 +6,9 @@ Object::Object(const char** textures, int* text_size)
 	initializeSpriteSheets(textures, text_size);
 
 	sprite = new sf::Sprite;
-	sprite->setTexture(*(spritesheets->at(0)->getTexture()));
+	spritesheet = spritesheets->at(0);
+	sprite->setTexture(*spritesheet->getTexture());
+	sprite->setTextureRect(*spritesheet->getRect(0));
 	sprite_height = sprite->getGlobalBounds().height;
 	sprite_width = sprite->getGlobalBounds().width;
 }

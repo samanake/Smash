@@ -6,7 +6,7 @@
 #define fireball1 "textures/p1idle.png"
 
 static const char* p1[1] = { p1idle };
-static int p1size[1] = { 1 };
+static int p1size[1] = { 13 };
 
 static const char* p2[1] = { p2idle };
 static int p2size[1] = { 1 };

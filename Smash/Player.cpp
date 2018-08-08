@@ -89,6 +89,11 @@ void Player::checkFloorCollision(Object* floor) { //interacts with collision bet
 	}
 }
 
+void Player::idle() {
+	SpriteSheet* idleSprite = spritesheets->at(0);
+	sprite->setTextureRect(*spritesheets->at(0)->getRect(0));
+
+}
 void Player::pause() { //this would be called if player was stunned or something
 
 }
