@@ -11,7 +11,7 @@ Stage::Stage()
 }
 
 void Stage::addFloor(float width, float height, float xpos, float ypos) {
-	Floor* floor = new Floor(ground, groundsize, width, height, xpos, ypos);
+	Floor* floor = new Floor(&ground, groundsize, width, height, xpos, ypos);
 	floors.push_back(floor);
 }
 

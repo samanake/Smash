@@ -1,7 +1,7 @@
 #include "Player.h"
 using namespace std;
 //the player is given its own vector of projectiles. When a player is killed, its projectiles slowly fade/are deleted along with the players.
-Player::Player(sf::Keyboard::Key* keys, const char** textures, int* size, sf::RenderWindow * window) :Object(textures, size)
+Player::Player(sf::Keyboard::Key* keys, char_vector_t* textures, int* size, sf::RenderWindow * window) :Object(textures, size)
 {
 	this->keys = keys;
 	this->ref_window = window;
@@ -119,7 +119,7 @@ void Player::updateProjectiles() { //moves their respective sprites
 	//adding projectile
 	if (projectileFired) {
 		if (cooldown == NULL) {
-			addProjectile(new Projectile(fireball, fireballsize, this, 5.0f, 2000, 10, ref_window));
+			addProjectile(new Projectile(&fireball, fireballsize, this, 5.0f, 2000, 10, ref_window));
 			cooldown = new LifeSpan(300);
 			//switchSpriteSheets(1);
 		}

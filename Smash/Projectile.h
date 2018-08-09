@@ -12,7 +12,7 @@ private:
 	LifeSpan* lifespan; //lifespan left
 	int damage;
 public:
-	Projectile(const char** textures, int* text_size, Object* object,
+	Projectile(char_vector_t* textures, int* text_size, Object* object,
 		double velocity, int lifespan, int damage, sf::RenderWindow * window);
 	void checkFloorCollision(Object* floor);
 	void update();

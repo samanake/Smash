@@ -22,7 +22,7 @@ private:
 	LifeSpan * cooldown;
 	sf::RenderWindow * ref_window;
 public:
-	Player(sf::Keyboard::Key* keys, const char** textures, int* size, sf::RenderWindow * window);
+	Player(sf::Keyboard::Key* keys, char_vector_t* textures, int* size, sf::RenderWindow * window);
 
 	void attack();
 	void checkPlayerButtons(sf::Event& event, bool cond);

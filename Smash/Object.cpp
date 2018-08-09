@@ -1,7 +1,7 @@
 #include "Object.h"
 
 
-Object::Object(const char** textures, int* text_size)
+Object::Object(char_vector_t* textures, int* text_size)
 {
 
 	sprite = new sf::Sprite;
@@ -30,11 +30,11 @@ void Object::switchSpriteSheets(int index) {
 	}
 }
 
-void Object::initializeSpriteSheets(const char** textures, int* text_size) {
-	size = sizeof(text_size) / sizeof(text_size[0]) - 1;
+void Object::initializeSpriteSheets(char_vector_t* textures, int* text_size) {
+	size = textures->size();
 	spritesheets = new vector<SpriteSheet*>;
 	for (int i = 0; i < size; i++) {
-		spritesheets->push_back(new SpriteSheet(textures[i], text_size[i]));
+		spritesheets->push_back(new SpriteSheet(textures->at(i), text_size[i]));
 	}
 
 	switchSpriteSheets(0);

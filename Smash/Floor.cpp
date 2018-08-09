@@ -5,7 +5,7 @@ void Floor::draw(sf::RenderWindow* window) {
 	window->draw(*sprite);
 }
 
-Floor::Floor(const char** textures, int* text_size, float width, 
+Floor::Floor(char_vector_t* textures, int* text_size, float width, 
 	float height, float xpos, float ypos) :Object(textures, text_size)
 {
 	this->width = width;

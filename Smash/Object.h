@@ -11,11 +11,11 @@ protected:
 	SpriteSheet* current_spritesheet;
 	float sprite_height;
 	float sprite_width;
-	size_t size; //number of spritesheets
+	int size; //number of spritesheets
 public:
-	Object(const char** textures, int* text_size);
+	Object(char_vector_t* textures, int * text_size);
 
-	void initializeSpriteSheets(const char** textures, int* text_size);
+	void initializeSpriteSheets(char_vector_t* textures, int* text_size);
 	void switchSpriteSheets(int index);
 	void play_spritesheet();
 

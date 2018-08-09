@@ -1,6 +1,6 @@
 #include "Projectile.h"
 
-Projectile::Projectile(const char** textures, int* text_size, Object* owner, double velocity, int lifespan, 
+Projectile::Projectile(char_vector_t* textures, int* text_size, Object* owner, double velocity, int lifespan, 
 						int damage, sf::RenderWindow * window) :Object(textures, text_size)
 {
 	this->owner = owner;

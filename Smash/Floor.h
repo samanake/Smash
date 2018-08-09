@@ -6,7 +6,7 @@ private:
 	float width, height;
 public:
 	void draw(sf::RenderWindow* window);
-	Floor(const char** textures, int* text_size, float width,
+	Floor(char_vector_t* textures, int* text_size, float width,
 		float height, float xpos, float ypos);
 	~Floor();
 };
