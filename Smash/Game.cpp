@@ -95,18 +95,12 @@ void Game::checkEvents() { //only button presses and stuff
 void Game::update() { //move movements or do things and stuff
 
 	player1->update();
-	player2->update(); //uncomment to update player2
+	//player2->update(); //uncomment to update player2
 
 }
 
 void Game::render() { //only draws and stuff
 	window->clear();
-	/*window->draw(text);
-	window->draw(text2);
-	window->draw(text3);
-	window->draw(text4);
-	window->draw(text5);
-	window->draw(text6);*/
 	window->draw(text7);
 	player1->draw(window);
 	player2->draw(window);

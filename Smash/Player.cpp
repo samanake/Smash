@@ -13,7 +13,6 @@ Player::Player(sf::Keyboard::Key* keys, char_vector_t* textures, int* size, sf::
 
 	cooldown = NULL;
 	projectiles = new vector<Projectile*>();
-	idle();
 }
 
 void Player::checkPlayerButtons(sf::Event& event, bool cond) {
@@ -42,9 +41,24 @@ void Player::checkPlayerButtons(sf::Event& event, bool cond) {
 
 void Player::update() {
 	move();
-	Object::play_spritesheet(); //plays current spritesheet
 	checkCooldown();
 	updateProjectiles();
+	checkSpriteSheets();
+	Object::play_spritesheet(); //plays current spritesheet
+}
+
+void Player::checkSpriteSheets() {
+	if (projectileFired) {
+		switchSpriteSheets(2);
+	}
+
+	else if (jumped1 || jumped2 || isJumping) {
+		switchSpriteSheets(1);
+	}
+
+	else {
+		switchSpriteSheets(0); //idle sprite
+	}
 }
 
 void Player::checkFloorCollision(Object* floor) { //interacts with collision between player and all floors
@@ -70,14 +84,6 @@ void Player::checkFloorCollision(Object* floor) { //interacts with collision bet
 		setRight(false);
 		this->place_left_of(floor);
 	}
-}
-
-void Player::idle() {
-	switchSpriteSheets(0);
-}
-
-void Player::attack() {
-	switchSpriteSheets(2);
 }
 
 void Player::pause() { //this would be called if player was stunned or something

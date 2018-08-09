@@ -24,8 +24,6 @@ private:
 public:
 	Player(sf::Keyboard::Key* keys, char_vector_t* textures, int* size, sf::RenderWindow * window);
 
-	void attack();
-	void checkPlayerButtons(sf::Event& event, bool cond);
 	void move();
 	void update();
 	void draw(sf::RenderWindow* window);
@@ -34,7 +32,6 @@ public:
 	float getXVelocity();
 	float getYVelocity();
 
-	void idle();
 	void pause();
 	void push_back(sf::Vector2f* direction); 
 
@@ -47,6 +44,8 @@ public:
 	void updateProjectiles();
 	void drawProjectiles(sf::RenderWindow* window);
 
+	void checkPlayerButtons(sf::Event& event, bool cond);
+	void checkSpriteSheets();
 	void checkCooldown();
 	void checkFloorCollision(Object* floor);
 
