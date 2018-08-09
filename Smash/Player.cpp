@@ -91,7 +91,7 @@ void Player::checkFloorCollision(Object* floor) { //interacts with collision bet
 }
 
 void Player::idle() {
-	switchSpriteSheets(0);
+	play_spritesheet(0);
 }
 void Player::pause() { //this would be called if player was stunned or something
 

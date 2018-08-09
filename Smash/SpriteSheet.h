@@ -19,5 +19,6 @@ public:
 	int getIndex();
 	void play();
 	void update();
+	void stop();
 	~SpriteSheet();
 };
