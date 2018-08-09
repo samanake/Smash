@@ -17,6 +17,7 @@ public:
 
 	void initializeSpriteSheets(const char** textures, int* text_size);
 	void switchSpriteSheets(int index);
+	void play_spritesheet(int index);
 
 	virtual bool isColliding(Object* object);
 	int checkCollisionDirection(Object* object);
