@@ -17,23 +17,17 @@ void Object::draw(sf::RenderWindow* window) {
 	window->draw(*sprite);
 }
 
-void Object::update() {
-	current_spritesheet->update();
-	sprite->setTextureRect(*current_spritesheet->getRect());
-}
-
-void Object::play_spritesheet(int index) {
-	if (current_spritesheet != spritesheets->at(index)) {
-		switchSpriteSheets(index);
-	}
+void Object::play_spritesheet() {
 	current_spritesheet->play();
 	sprite->setTextureRect(*current_spritesheet->getRect());
 }
 
 void Object::switchSpriteSheets(int index) {
-	if (current_spritesheet != NULL) current_spritesheet->stop();
-	current_spritesheet = spritesheets->at(index);
-	sprite->setTexture(*current_spritesheet->getTexture());
+	if (current_spritesheet != spritesheets->at(index)) {
+		if (current_spritesheet != NULL) current_spritesheet->stop();
+		current_spritesheet = spritesheets->at(index);
+		sprite->setTexture(*current_spritesheet->getTexture());
+	}
 }
 
 void Object::initializeSpriteSheets(const char** textures, int* text_size) {

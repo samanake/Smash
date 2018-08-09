@@ -16,10 +16,6 @@ Player::Player(sf::Keyboard::Key* keys, const char** textures, int* size, sf::Re
 	idle();
 }
 
-void Player::attack() {
-
-}
-
 void Player::checkPlayerButtons(sf::Event& event, bool cond) {
 	if (event.key.code == keys[0]) { //up
 		if (canJump()) {
@@ -48,7 +44,6 @@ void Player::update() {
 	sf::Vector2f movement(0.f, 0.f);
 	//if (left) movement.x -= xspeed;
 	//if (right) movement.x += xspeed;
-	Object::update();
 
 	if (left && xvelocity >= -xspeed) xvelocity -= xspeed;
 	else if (right && xvelocity <= xspeed) xvelocity += xspeed;
@@ -60,7 +55,7 @@ void Player::update() {
 	sprite->move(movement);
 
 	yvelocity += gravity;
-
+	Object::play_spritesheet(); //plays current spritesheet
 	checkCooldown();
 	updateProjectiles();
 }
@@ -91,8 +86,13 @@ void Player::checkFloorCollision(Object* floor) { //interacts with collision bet
 }
 
 void Player::idle() {
-	play_spritesheet(0);
+	switchSpriteSheets(0);
 }
+
+void Player::attack() {
+	switchSpriteSheets(2);
+}
+
 void Player::pause() { //this would be called if player was stunned or something
 
 }

@@ -37,22 +37,13 @@ void Game::changeState(int state) {
 	}
 }
 
+
 void Game::checkCollision(Player* player, vector<Floor*>* floors) {
 	//collision between player and all floors
 	for (auto i : *floors) {
-
-		text3.setString("Player: " + to_string(player->get_left_x()) + "," + to_string(player->get_right_x()) +
-			" by " + to_string(player->get_top_y()) + "," + to_string(player->get_bottom_y()));
-		text4.setString("Can Jump: " + to_string(player1->canJump()));
-		text5.setString("Jumped1: " + to_string(player->getJumped1()));
-		text6.setString("Jumped2: " + to_string(player->getJumped2()));
-		text7.setString("Player XVel: " + to_string(player1->getXVelocity()));
-
 		player->checkFloorCollision(i);
-
 	}
 }
-
 void Game::checkCollision(Projectile* projectile, vector<Floor*>* floors) {
 	//collision between each projectile and all floors
 	for (auto i : *floors) {
@@ -67,8 +58,6 @@ void Game::checkCollision(Player* player, vector<Projectile*>* projectiles) {
 			projectiles->erase(projectiles->begin() + i);
 		}
 	}
-
-
 }
 void Game::checkCollisions(vector<Projectile*>* projectiles, vector<Floor*>* floors) {
 	for (auto i : *projectiles) {
@@ -77,15 +66,13 @@ void Game::checkCollisions(vector<Projectile*>* projectiles, vector<Floor*>* flo
 
 }
 void Game::checkAllCollisions() { //checks all collisions specific interaction with collision
-	for (auto i : *players) {
-		checkCollision(i, stage->getFloors());
-		//will add more for projectiles and such
-		checkCollisions(i->getProjectiles(), stage->getFloors());
-		for (auto j : *players) {
+	for (auto i : *players) { 
+		checkCollision(i, stage->getFloors()); //collisions between every player and floor
+		checkCollisions(i->getProjectiles(), stage->getFloors()); //collisions between every projectile and floor
+		for (auto j : *players) { //collisions between every player and other player
 			checkCollision(i, j->getProjectiles());
 		}
 	}
-
 }
 void Game::checkEvents() { //only button presses and stuff
 	sf::Event event;

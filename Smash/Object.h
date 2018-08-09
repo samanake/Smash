@@ -17,7 +17,7 @@ public:
 
 	void initializeSpriteSheets(const char** textures, int* text_size);
 	void switchSpriteSheets(int index);
-	void play_spritesheet(int index);
+	void play_spritesheet();
 
 	virtual bool isColliding(Object* object);
 	int checkCollisionDirection(Object* object);
@@ -44,7 +44,7 @@ public:
 	void place_left_of(Object* object); //places object left of object
 
 	virtual void draw(sf::RenderWindow* window);
-	virtual void update();
+	//virtual void update();
 	~Object();
 };
 
