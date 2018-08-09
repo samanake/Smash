@@ -41,20 +41,7 @@ void Player::checkPlayerButtons(sf::Event& event, bool cond) {
 }
 
 void Player::update() {
-	sf::Vector2f movement(0.f, 0.f);
-	//if (left) movement.x -= xspeed;
-	//if (right) movement.x += xspeed;
-
-	if (left && xvelocity >= -xspeed) xvelocity -= xspeed;
-	else if (right && xvelocity <= xspeed) xvelocity += xspeed;
-	else if (xvelocity > 0.031) xvelocity -= dragFactor;
-	else if (xvelocity < -0.031) xvelocity += dragFactor;
-	else xvelocity = 0.000;
-	movement.x = xvelocity;
-	movement.y = yvelocity;
-	sprite->move(movement);
-
-	yvelocity += gravity;
+	move();
 	Object::play_spritesheet(); //plays current spritesheet
 	checkCooldown();
 	updateProjectiles();
@@ -95,6 +82,23 @@ void Player::attack() {
 
 void Player::pause() { //this would be called if player was stunned or something
 
+}
+
+void Player::move() {
+	sf::Vector2f movement(0.f, 0.f);
+	//if (left) movement.x -= xspeed;
+	//if (right) movement.x += xspeed;
+
+	if (left && xvelocity >= -xspeed) xvelocity -= xspeed;
+	else if (right && xvelocity <= xspeed) xvelocity += xspeed;
+	else if (xvelocity > 0.031) xvelocity -= dragFactor;
+	else if (xvelocity < -0.031) xvelocity += dragFactor;
+	else xvelocity = 0.000;
+	movement.x = xvelocity;
+	movement.y = yvelocity;
+	sprite->move(movement);
+
+	yvelocity += gravity;
 }
 void Player::push_back(sf::Vector2f* direction) { //like smash, hits or projectiles send players backwards
 

@@ -26,6 +26,7 @@ public:
 
 	void attack();
 	void checkPlayerButtons(sf::Event& event, bool cond);
+	void move();
 	void update();
 	void draw(sf::RenderWindow* window);
 	void setXVelocity(float xVelocity);
