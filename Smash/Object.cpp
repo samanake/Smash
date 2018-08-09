@@ -22,18 +22,11 @@ void Object::update() {
 	sprite->setTextureRect(*current_spritesheet->getRect());
 }
 
-void Object::play_spritesheet(int index) {
-	if (current_spritesheet != spritesheets->at(index)) {
-		switchSpriteSheets(index);
-	}
-	current_spritesheet->play();
-	sprite->setTextureRect(*current_spritesheet->getRect());
-}
-
 void Object::switchSpriteSheets(int index) {
-	if (current_spritesheet != NULL) current_spritesheet->stop();
 	current_spritesheet = spritesheets->at(index);
 	sprite->setTexture(*current_spritesheet->getTexture());
+	sprite->setTextureRect(*current_spritesheet->getRect());
+	current_spritesheet->play();
 }
 
 void Object::initializeSpriteSheets(const char** textures, int* text_size) {

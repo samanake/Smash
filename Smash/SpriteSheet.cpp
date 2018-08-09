@@ -21,14 +21,11 @@ int SpriteSheet::getIndex() { return index; }
 sf::IntRect* SpriteSheet::getRect() { return &rect[index]; }
 
 void SpriteSheet::play() {
-	if (!isPlaying) {
-		index = 0;
-		isPlaying = true;
-		if (rotation == NULL)
-			rotation = new LifeSpan(rotationSpeed);
-		else rotation->reset(rotationSpeed);
-	}
-	else update();
+	index = 0;
+	if (rotation == NULL) 
+		rotation = new LifeSpan(rotationSpeed);
+	else rotation->reset(rotationSpeed);
+	isPlaying = true;
 }
 
 void SpriteSheet::update() {
@@ -41,10 +38,6 @@ void SpriteSheet::update() {
 			rotation->reset(rotationSpeed);
 		}
 	}
-}
-
-void SpriteSheet::stop() {
-	isPlaying = false;
 }
 
 sf::Texture* SpriteSheet::getTexture() {
