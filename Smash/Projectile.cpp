@@ -7,16 +7,20 @@ Projectile::Projectile(char_vector_t* textures, int* text_size, Object* owner, d
 	sf::Vector2i mouse = sf::Mouse::getPosition(*window);
 	sf::Vector2f object_pos = owner->getSprite()->getPosition();
 	sprite->setPosition(object_pos);
-
+	sprite->setScale(1.5f, 1.5f);
 	direction = new sf::Vector2f();
 	float xdirection = mouse.x - object_pos.x;
 	float ydirection = mouse.y - object_pos.y;
-	float angle = atan2f(ydirection, xdirection);
+	angle = atan2f(ydirection, xdirection);
+	float degrees = angle * (180.0 / 3.141592653589793238463)+90;
+	sprite->setRotation(degrees);
+
 	direction->x = cos(angle);
 	direction->y = sin(angle);
 
 	this->velocity = velocity;
 	drag = .02;
+	
 
 	this->lifespan = new LifeSpan(lifespan);
 
@@ -32,6 +36,8 @@ void Projectile::update() {
 		//delete this;
 	//}
 	if (velocity > 0) velocity -= drag;
+	
+	play_spritesheet();
 }
 
 void Projectile::checkFloorCollision(Object* floor) { //checks collision between projectile and all floors.

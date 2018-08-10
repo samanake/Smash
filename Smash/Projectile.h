@@ -9,6 +9,7 @@ private:
 	Object * owner;
 	sf::Vector2f* direction;
 	double velocity, drag;
+	float angle;
 	LifeSpan* lifespan; //lifespan left
 	int damage;
 public:

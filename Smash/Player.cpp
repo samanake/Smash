@@ -44,7 +44,8 @@ void Player::update() {
 	checkCooldown();
 	updateProjectiles();
 	checkSpriteSheets();
-	Object::play_spritesheet(); //plays current spritesheet
+	
+	play_spritesheet(); //plays current spritesheet
 }
 
 void Player::checkSpriteSheets() {

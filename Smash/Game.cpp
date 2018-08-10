@@ -19,6 +19,7 @@ Game::Game(sf::RenderWindow& window)
 	makeText(text5, 150, 100); //jumped1
 	makeText(text6, 150, 150); //jumped2
 	makeText(text7, 150, 200); //isJumping
+
 	//initalize stage
 	stage = new Stage();
 	stage->addFloor(400.f, 400.f, 200, 850);
@@ -95,7 +96,7 @@ void Game::checkEvents() { //only button presses and stuff
 void Game::update() { //move movements or do things and stuff
 
 	player1->update();
-	//player2->update(); //uncomment to update player2
+	player2->update(); //uncomment to update player2
 
 }
 
